@@ -1,0 +1,61 @@
+models:
+  ollama-simple:
+    provider: ollama
+    model_name: "phi"
+    speed: 30
+    cost: 0.0001
+    description: "Fast and accurate model for simple tasks"
+    max_length: 100
+
+  ollama-medium:
+    provider: ollama
+    model_name: "gemma:2b"
+    speed: 80
+    cost: 0.0003
+    description: "Balanced model for medium complexity tasks"
+    max_length: 200
+
+  gpt2-large:
+    provider: huggingface
+    model_name: "gpt2-large"
+    speed: 300
+    cost: 0.01
+    description: "Advanced model for complex analysis"
+    max_length: 300
+
+routing:
+  confidence_thresholds:
+    simple: 0.75
+    medium: 0.70
+    advanced: 0.60
+  fallback_model: ollama-simple
+
+caching:
+  ttl_seconds: 3600
+  max_size: 1000
+
+classification:
+  simple_keywords:
+    - "what is"
+    - "define"
+    - "who is"
+    - "when was"
+    - "list"
+    - "tell me about"
+    - "how many"
+    - "how much"
+  
+  advanced_keywords:
+    - "analyze"
+    - "compare"
+    - "explain the impact"
+    - "design a system"
+    - "develop a strategy"
+    - "critique"
+    - "complex"
+    - "multi-step"
+    - "synthesize"
+  
+  query_length_thresholds:
+    simple: 80
+    advanced: 200
